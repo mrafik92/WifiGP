@@ -1,4 +1,3 @@
-% karim 7ot el file
 
 function encoded_data = LDPC_encoder( data , A_MPDU_length , mstbc , MCS_index , BW , NSS)
 
@@ -8,9 +7,11 @@ MCS  = struct('Modulation' , {'BPSK' , 'QPSK' , 'QPSK' , '16-QAM', '16-QAM' , '6
                               '64-QAM' ,  '256-QAM' , '256-QAM' ,},...
               'Code_rate' , {0.5 , 0.5, 0.75, 0.5, 0.75, 2/3 ,3/4 , 5/6, 3/4, 5/6} ...
              , 'NBPSCS' , {1 , 2 , 2 , 4 ,4, 6, 6, 6, 8, 8});
-         R = MCS(MCS_index).Code_rate; 
+
+R = MCS(MCS_index).Code_rate; 
 Ncarriers = [52 , 108, 234 , 468];
-NDBPS = Ncarriers(BW) * R  * MCS(MCS_index).NBPSCS * NSS ;
+NDBPS = Ncarriers(BW) * R * MCS(MCS_index).NBPSCS * NSS ;
+
 %% Step one: OFDM Symbol number
 Nsym = mstbc *  ceil((8 * A_MPDU_length +16)/(mstbc * NDBPS));
 Npld = Nsym * NDBPS;
@@ -63,5 +64,8 @@ end
 encoded = zeros(Ncw,NLDPC);
 for i =1:Ncw
     temp = [data((i-1)*NLDPC*R + 1:i*NLDPC*R) zeros(1,shrt_array(i))];
+    assert(length(temp)<=NLDPC,'Error in line 67, length of data&shtBits is bigger than NLDPC');
     encoded(i,1:length(temp)) = temp;
 end
+
+
