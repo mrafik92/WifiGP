@@ -1,7 +1,7 @@
 WifiGP
 ======
 
-MATLAB implementation and simulation of Wifi 802.11ac
+Simulation of Wifi 802.11ac using MATLAB and then implemting it on a DSP.
 
 If you need the draft version 7.0 contact me at mrafik92@gmail.com
 
