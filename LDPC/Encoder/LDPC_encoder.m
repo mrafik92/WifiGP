@@ -1,4 +1,3 @@
-
 function encoded_data = LDPC_encoder( data , A_MPDU_length , mstbc , MCS_index , BW , NSS)
 
 % Kareem - Seif - Rafik 
