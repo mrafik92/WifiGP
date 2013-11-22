@@ -1,0 +1,83 @@
+function[soft_bit_demod_signal]=QAM64_demodulation_v1(recieved_signal)
+m=1;
+for l=1:length(recieved_signal)
+yre=real(recieved_signal(l));
+yim=imag(recieved_signal(l));
+if (yre<-6)
+    soft_bit_demod_signal(m)=4*(yre+3);
+elseif(yre>=-6&&yre<-4)
+    soft_bit_demod_signal(m)=3*(yre+2);
+elseif(yre>=-4&&yre<-2)
+    soft_bit_demod_signal(m)=2*(yre+1);
+elseif(yre>=-2&&yre<=2)
+    soft_bit_demod_signal(m)=yre;
+elseif(yre>2&&yre<=4)
+    soft_bit_demod_signal(m)=2*(yre-1);
+elseif(yre>4&&yre<=6)
+    soft_bit_demod_signal(m)=3*(yre-2);
+elseif(yre>6)
+    soft_bit_demod_signal(m)=4*(yre-3);
+end
+if(yre<-6)
+    soft_bit_demod_signal(m+1)=2*(yre+5)
+elseif(yre>=-6&&yre<-2)
+    soft_bit_demod_signal(m+1)=4+yre;
+elseif(yre>=-2&&yre<0)
+    soft_bit_demod_signal(m+1)=2*(yre+3);
+elseif(yre>=0&&yre<=2)
+    soft_bit_demod_signal(m+1)=2*(3-yre);
+elseif(yre>2&&yre<=6)
+    soft_bit_demod_signal(m+1)=4-yre;
+elseif(yre>6)
+    soft_bit_demod_signal(m+1)=2*(5-yre);
+end
+if(yre<-4)
+    soft_bit_demod_signal(m+2)=yre+6;
+elseif(yre>=-4&&yre<0)
+    soft_bit_demod_signal(m+2)=-2-yre;
+elseif(yre>=0&&yre<=4)
+    soft_bit_demod_signal(m+2)=yre-2;
+elseif(yre>4)
+    soft_bit_demod_signal(m+2)=6-yre;
+end
+
+%%%%%%%
+if (yim<-6)
+    soft_bit_demod_signal(m+3)=4*(yim+3);
+elseif(yim>=-6&&yim<-4)
+    soft_bit_demod_signal(m+3)=3*(yim+2);
+elseif(yim>=-4&&yim<-2)
+    soft_bit_demod_signal(m+3)=2*(yim+1);
+elseif(yim>=-2&&yim<=2)
+    soft_bit_demod_signal(m+3)=yim;
+elseif(yim>2&&yim<=4)
+    soft_bit_demod_signal(m+3)=2*(yim-1);
+elseif(yim>4&&yim<=6)
+    soft_bit_demod_signal(m+3)=3*(yim-2);
+elseif(yim>6)
+    soft_bit_demod_signal(m+3)=4*(yim-3);
+end
+if(yim<-6)
+    soft_bit_demod_signal(m+4)=2*(yre+5)
+elseif(yim>=-6&&yim<-2)
+    soft_bit_demod_signal(m+4)=4+yim;
+elseif(yim>=-2&&yim<0)
+    soft_bit_demod_signal(m+4)=2*(yre+3);
+elseif(yim>=0&&yim<=2)
+    soft_bit_demod_signal(m+4)=2*(3-yre);
+elseif(yim>2&&yim<=6)
+    soft_bit_demod_signal(m+4)=4-yim;
+elseif(yim>6)
+    soft_bit_demod_signal(m+4)=2*(5-yre);
+end
+if(yim<-4)
+    soft_bit_demod_signal(m+5)=yim+6;
+elseif(yim>=-4&&yim<0)
+    soft_bit_demod_signal(m+5)=-2-yim;
+elseif(yim>=0&&yim<=4)
+    soft_bit_demod_signal(m+5)=yim-2;
+elseif(yim>4)
+    soft_bit_demod_signal(m+5)=6-yim;
+end
+m=m+6;
+end
